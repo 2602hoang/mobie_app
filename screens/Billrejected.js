@@ -70,7 +70,8 @@ export default function Billrejected({route}) {
       />
       <View style={{height:'80%'}}>
         <FlatList
-        data={billrejected}
+        data={billrejected?.reverse()}
+        
         renderItem={({ item }) => (
             <View
               style={{

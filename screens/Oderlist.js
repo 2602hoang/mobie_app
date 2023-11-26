@@ -78,6 +78,7 @@ export default function Oderlist({ route, navigation }) {
       if (response.data.statusCode === 200) {
 
         setBills(response.data.data);
+        
       }
     } catch (error) {
       console.log('error', error);

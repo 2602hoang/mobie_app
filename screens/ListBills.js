@@ -159,6 +159,7 @@ export default function ListBills({ route, }) {
       const response = await axios.get(`${URL}api/v1/booking/table/${route.params.id}`);
       if (response.data.statusCode === 200) {
         setListbill(response.data.data);
+     
       }
 
     } catch (error) {

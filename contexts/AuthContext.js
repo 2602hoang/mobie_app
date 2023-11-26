@@ -61,7 +61,7 @@ export const AuthContextProvider = ({ children }) => {
 
 			const response = await axios.post(`${URL}api/v1/auth/sign-in`,
 			{
-				username: email,
+				email: email,
 				password: password,
 			}
 			)	
