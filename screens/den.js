@@ -77,7 +77,7 @@ export default function Den({ route }) {
   return (
     <View style={{ backgroundColor: '#ffffcc', flex: 1 }}>
       <UIHeader
-        title={`CHỌN MÓN TRẢ VÀ NHẬP SL VÀ MÃ PIN`}
+        title={`CHỌN MÓN TRẢ NHẬP SL`}
         isShowBack
       />
       <View style={{ flex: 1 }}>
@@ -124,7 +124,7 @@ export default function Den({ route }) {
                 color: 'while',
                 padding: 5,
 
-              }}>Nhập só lượng trả</Text>
+              }}>Nhập só lượng trả và mã pin</Text>
             <View
               style={{
                 marginTop: 5,
@@ -193,7 +193,7 @@ export default function Den({ route }) {
                 onPress={() => setModalVisible(false)}>
                 <Text
                   style={{
-
+                    color:'black'
                   }}
                 >Hủy</Text>
               </TouchableOpacity>
@@ -215,7 +215,8 @@ export default function Den({ route }) {
                 }}>
                 <Text
                   style={{
-                    marginLeft: 5
+                    marginLeft: 5,
+                    color:'black'
                   }}
                 >Trả hàng</Text>
               </TouchableOpacity>

@@ -110,7 +110,7 @@ export default function FoodList({ navigation, route }) {
     // }
     return <View style={{ flex: 1, backgroundColor: '#FFFFCC' }}>
         <View style={{
-            height:'10%',
+            height: '12%',
             marginHorizontal: 5,
             marginVertical: 5,
             flexDirection: 'row',
@@ -143,23 +143,42 @@ export default function FoodList({ navigation, route }) {
             <SearchNormal1 size="55" color="#000000" />
 
         </View>
-        <View style={{height:'9%'}}>
-        <View style={{flexDirection:'row',height:'auto',alignSelf:'center', }}>
-        <TouchableOpacity onPress={() => {
+        <View style={{ height: '13%' }}>
+            <View style={{ flexDirection: 'row', height: 'auto', alignSelf: 'center', }}>
+
+                <TouchableOpacity onPress={() => {
                     getProducts();
+                    Toast.show('Hiển thị tất cả các món ',
+                        {
+                            backgroundColor: '#3B404F',
+                            textColor: '#ffffff',
+                            opacity: 1,
+                            duration: Toast.durations.SHORT,
+                            position: Toast.positions.BOTTOM,
+                            animation: true,
+                        })
                 }}>
                     <Text style={{ color: 'black', fontSize: fontSizes.h2, }} >|⭐ Tất Cả|</Text></TouchableOpacity>
-        <TouchableOpacity onPress={() => {
+                <TouchableOpacity onPress={() => {
                     getproductLimmit(8);
+                    Toast.show('Hiển thị 8 món có lượt bán cao ',
+                        {
+                            backgroundColor: '#3B404F',
+                            textColor: '#ffffff',
+                            opacity: 1,
+                            duration: Toast.durations.SHORT,
+                            position: Toast.positions.BOTTOM,
+                            animation: true,
+                        })
                 }}>
                     <Text style={{ color: 'black', fontSize: fontSizes.h2, }} > |⭐8 món lượt bán cao|</Text></TouchableOpacity>
 
-           
 
-                    </View>
-        <View style={{
-             backgroundColor: '#FFFFCC', marginTop: 1, marginBottom: 5, flexDirection: 'row'
-        }}>
+
+            </View>
+            <View style={{
+                backgroundColor: '#FFFFCC', marginTop: 1, marginBottom: 5, flexDirection: 'row'
+            }}>
             </View>
 
             <FlatList
@@ -169,7 +188,7 @@ export default function FoodList({ navigation, route }) {
                     loais
                 }
                 renderItem={({ item }) => {
-                    return <View style={{ borderColor: 'black', flexDirection: 'row',borderTopWidth:1,borderBottomWidth:1 }}>
+                    return <View style={{ borderColor: 'black', flexDirection: 'row', borderTopWidth: 1, borderBottomWidth: 1 }}>
 
 
 
@@ -178,6 +197,15 @@ export default function FoodList({ navigation, route }) {
                             style={{}}
                             onPress={() => {
                                 getCategoryID(item.ID);
+                                Toast.show(`Hiển thị các món thuộc loại ${item.name}`,
+                                    {
+                                        backgroundColor: '#3B404F',
+                                        textColor: '#ffffff',
+                                        opacity: 1,
+                                        duration: Toast.durations.SHORT,
+                                        position: Toast.positions.BOTTOM,
+                                        animation: true,
+                                    })
 
                             }}
 
@@ -186,18 +214,18 @@ export default function FoodList({ navigation, route }) {
                             <Text style={{ color: 'black', fontSize: fontSizes.h2, }} >⭐ {item.name} | </Text>
 
                         </TouchableOpacity>
-                       
+
 
 
                     </View>
                 }} >
-                
+
             </FlatList>
 
 
         </View>
 
-        <View style={{ height: '79%' }}>
+        <View style={{ height: '73%' }}>
             <FlatList
                 data={
                     timkiem ?
@@ -334,11 +362,11 @@ export default function FoodList({ navigation, route }) {
 
                                     <Text style={{ textAlign: 'center', color: 'red', fontSize: fontSizes.h4, fontWeight: 'bold' }} >THÊM VÀO GIỎ HÀNG</Text>
 
-                                </TouchableOpacity> : 
-                                <View style={{backgroundColor:'#ffffff'}}>
-                                <Text style={{ textAlign: 'center', color: 'black', fontWeight: 'bold', }}>(Nhà Hàng Ngưng Phục Vụ Món Trên)</Text>
+                                </TouchableOpacity> :
+                                <View style={{ backgroundColor: '#ffffff' }}>
+                                    <Text style={{ textAlign: 'center', color: 'black', fontWeight: 'bold', }}>(Nhà Hàng Ngưng Phục Vụ Món Trên)</Text>
                                 </View>
-                                }
+                            }
 
 
 

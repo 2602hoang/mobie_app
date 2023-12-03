@@ -10,7 +10,7 @@ import { AuthContext } from "../contexts/AuthContext";
 
 
 export default function Billitem1({ item1, setModalVisible, setOrderId, setPrdId, orderId, setSLMax }) {
-
+  // {console.log(item1)}
   return (
     <View style={{}}>
       <Text style={{ fontWeight: 'bold', color: "black" }}>{`Tên nước: ${item1.product.name}`}</Text>
@@ -19,7 +19,7 @@ export default function Billitem1({ item1, setModalVisible, setOrderId, setPrdId
 
         <Text style={{ marginLeft: 140, fontWeight: 'bold', color: 'red' }}>{`Giá Giảm: ${fomartPrice(item1.product.discountPrice)}`}</Text>
       </View> */}
-      <Text style={{ marginRight: 50, textAlign: 'right', fontWeight: 'bold', color: 'red' }}>{`SL: ${item1.quantity}`}</Text>
+      <Text style={{ marginRight: 50, textAlign: 'right', fontWeight: 'bold', color: 'red' }}>{`SL: ${item1.quantity} `}</Text>
 
       <TouchableOpacity
         onPress={() => {

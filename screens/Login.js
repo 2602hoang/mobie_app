@@ -23,10 +23,10 @@ function Login({navigation},) {
  
     const [errorEmail, setErrorEmail] = useState('')
     const [errorPassword, setErrorPassword] = useState('');
-    const [email, setEmail] = useState('dso.intern.xuanhoa@gmail.com')
+    const [email, setEmail] = useState('levanc@gmail.com')
     //dsoFresherXuanHoa
     //dsoInternXuanHoa
-    const [password, setPassword] = useState('dso.intern.xuanhoa@gmail.com')
+    const [password, setPassword] = useState('levanc@gmail.com')
     const { Login, errorLogin } = useContext(AuthContext);
     const isValidationOK = () => email.length > 0 && password.length > 0
                             && isValidEmail(email) == true
@@ -139,9 +139,9 @@ function Login({navigation},) {
                 
                 }}>
                      {visible?
-                 <Eye  size="28"color="#FF8A65" style={{left:180,top:15,marginRight:2}}/> 
+                 <Eye  size="28"color="#FF8A65" style={{left:120,top:15,marginRight:2}}/> 
                     :
-                    <EyeSlash size="28"color="#FF8A65" style={{left:180,top:15,marginRight:2}}/>
+                    <EyeSlash size="28"color="#FF8A65" style={{left:120,top:15,marginRight:2}}/>
                      }
                 </TouchableOpacity>
              
@@ -157,8 +157,8 @@ function Login({navigation},) {
                     color: 'red', 
                     fontSize: fontSizes.h6,
                     marginBottom: 15, 
-                    textAlign:'left'                   
-                    }}>{errorPassword}</Text>
+                    textAlign:'center'                   
+                    }}>{errorLogin}</Text>
             </View>
         </View>
         {keyboardIsShown == false ? <View style={{  flex: 15 }}>

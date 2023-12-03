@@ -129,13 +129,13 @@ function Oderpin({ navigation, route }) {
     return (
         
         <View style={{ flex: 1, backgroundColor: '#ffffcc' }}>
-            <View style={{ flexDirection: 'row', borderBottomWidth: 4, borderTopWidth: 5 }}>
+            <View style={{height:'10%', flexDirection:'row', borderBottomWidth: 4, borderTopWidth: 5 }}>
                 <TouchableOpacity onPress={() => {
                     navigation.navigate('MyTabs');
                 }}>
                     <ArrowLeft size="55" color="black" />
                 </TouchableOpacity>
-                <Text style={{ left: 280, top: 20 }}>[BÀN: {table}]</Text>
+                <Text style={{ textAlign:'right',alignSelf:'center',right:-180 }}>[BÀN: {table}]</Text>
             </View>
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                 <SafeAreaView style={{ width: 300 }}>
@@ -144,7 +144,7 @@ function Oderpin({ navigation, route }) {
                         Hãy Nhập Chính Xác Mã Pin Của Bạn
                     </Text>
                     <Text>
-                        *___________________________________________*
+                        *_________________________________*
                     </Text>
                     <Text>
 
@@ -156,12 +156,12 @@ function Oderpin({ navigation, route }) {
                         secureTextEntry={true}
                         maxLength={4}
                         value={pin}
-                        style={{ paddingStart: 80, borderBottomWidth: 4, marginTop: 200 }}
+                        style={{ textAlign:'center', borderBottomWidth: 4, marginTop: 200,width:'80%' ,alignSelf:'center'}}
                         onChangeText={(text) => {setPin(text);}}
                     />
                     <Text></Text>
                     <Button
-                    style={{}}
+                    style={{width:'50%',}}
                         title="Xác Nhận Mã Pin"
                         onPress={() => {
                             toOrder();

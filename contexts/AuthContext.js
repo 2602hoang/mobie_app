@@ -56,7 +56,7 @@ export const AuthContextProvider = ({ children }) => {
 	
 
 	const Login = async (email,password) => {
-				
+				console.log(`${URL}api/v1/auth/sign-in`);
 		try {
 
 			const response = await axios.post(`${URL}api/v1/auth/sign-in`,

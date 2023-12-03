@@ -9,6 +9,7 @@ import {
     ScrollView, 
     Switch,
     SafeAreaView,
+    Alert,
 } from 'react-native'
 import {images, colors, icons, fontSizes} from '../constants'
 
@@ -27,7 +28,7 @@ function Setting (props) {
 		
 		
 	}, []);
-    
+    const [answer, setAnswer] = useState("");
     const { Logout,setMe,me} = useContext(AuthContext);
     const nav = useNavigation();
     const getThongtin =async ()=>
@@ -47,26 +48,26 @@ function Setting (props) {
         <View style={{ flex:1, backgroundColor:'#FFFFCC' }}>
             <UIHeader title={"THÔNG TIN & NGHIỆP VỤ"} isShowBack
             />
-            <ScrollView>
-                <View style={{height:'100', backgroundColor:'#CCFF66',justifyContent:'center',marginTop:5, marginBottom:10,marginLeft:5,marginRight:5,borderRadius:10}}>
+            <ScrollView style={{flex:1}}>
+                <View style={{height:'10%', backgroundColor:'#CCFF66',justifyContent:'center',marginTop:5, marginBottom:10,marginLeft:5,marginRight:5,borderRadius:10}}>
                     <Text style={{ fontSize:fontSizes.h1 ,color:'red', paddingStart:20,}}>Thông Tin Nhân Viên</Text>
                     
                 </View>
-                <View style={{height:150
+                <View style={{height:"35%"
                 }}>
                          <Text style={{paddingStart:15, fontSize:fontSizes.h2,color:'black'}}>HỌ VÀ TÊN: {me.fullName}</Text>
                          <Text></Text>
                          <Text style={{paddingStart:15, fontSize:fontSizes.h2,color:'black'}}>GIỚI TÍNH : {me.gender ? 'Nữ' : 'Nam'}</Text>
                          <Text></Text>
-                         <Text style={{paddingStart:15, fontSize:fontSizes.h2,color:'black'}} >SỐ ĐIỆN THOẠI: {me.tel}</Text>
+                         <Text style={{paddingStart:15, fontSize:fontSizes.h2,color:'black'}} >SDT:{me.tel}</Text>
                          <Text></Text>
                          <Text style={{paddingStart:15, fontSize:fontSizes.h2,color:'black'}}>CHỨC VỤ : Nhân Viên</Text>
 
                 </View>
-                    <View style={{height:'50', backgroundColor:'#CCFF66',justifyContent:'center',marginTop:30,marginLeft:5,marginRight:5,borderRadius:10}}>
+                    <View style={{height:'10%', backgroundColor:'#CCFF66',justifyContent:'center',marginTop:30,marginLeft:5,marginRight:5,borderRadius:10}}>
                 <Text style={{ fontSize:fontSizes.h1 ,color:'red', paddingStart:20 }}>Nghiệp Vụ </Text>
                     </View>
-                    <View>
+                    <View style={{height:'auto'}}>
                         
                         <TouchableOpacity
                         onPress={()=>{
@@ -81,7 +82,27 @@ function Setting (props) {
                             <Text style={{ fontSize:fontSizes.h2,marginBottom:10,marginTop:10,color:'black' }}>Thay đổi ngôn ngữ </Text>
                             </TouchableOpacity>
                         <TouchableOpacity style={{flexDirection:'row',paddingStart:30 ,borderBottomWidth:5,borderRadius:20,marginTop:5,borderBlockColor:'black'}} onPress={() => {
-                            Logout();
+                           Alert.alert(
+                            "bạn có chắc muốn đăng xuất khỏi ứng dụng?",
+                            "chắc chắn hoặc không",
+                            [
+                              {
+                                text: "chắc chắn",
+                                onPress: async () => {
+        
+                                  setAnswer("đúng");
+                                    Logout();
+                                }
+        
+                              },
+                              {
+                                text: "không",
+                                onPress: () => {
+                                  setAnswer("sai");
+                                }
+                              },
+                            ],
+                          );
                         }} >
                         <LogoutCurve size="30" color="black" style={{top:7,let:3}}/>
                             <Text style={{ fontSize:fontSizes.h2,marginBottom:10,marginTop:10 ,color:'black'}}>Đăng xuất tài khoản </Text>

@@ -68,7 +68,7 @@ export default function Oderlist({ route, navigation }) {
     }, 500);
   }, []);
 
-  
+
 
 
 
@@ -78,13 +78,13 @@ export default function Oderlist({ route, navigation }) {
       if (response.data.statusCode === 200) {
 
         setBills(response.data.data);
-        
+
       }
     } catch (error) {
       console.log('error', error);
     }
   }
-  
+
   const orderTotalPrices = {};
   bills.forEach((order) => {
     // console.log('456456',order)
@@ -105,7 +105,7 @@ export default function Oderlist({ route, navigation }) {
     // {!isLoading :<></>}
     <View style={{ backgroundColor: '#ffffcc', flex: 1 }}>
       <UIHeader
-        title={`ĐƠN HÀNG CHỜ XÁC NHẬN BÀN (${ban})`}
+        title={`ĐƠN CHỜ XÁC NHẬN BÀN (${ban})`}
         isShowBack
       />
 
@@ -113,93 +113,96 @@ export default function Oderlist({ route, navigation }) {
       {!isLoading ?
         <View >
           <View style={{ marginTop: 10, marginBottom: 10 }}>
-            <Text style={{ textAlign: "center", fontSize: fontSizes.h1, color: 'red',marginBottom:10 }}>-----Danh Sách Món Ăn-----</Text>
+            <Text style={{ textAlign: "center", fontSize: fontSizes.h1, color: 'red', marginBottom: 10 }}>---Danh Sách Món Ăn---</Text>
             <TouchableOpacity
-            onPress={()=>{
-              nav.navigate('Billrejected',{ID :ban});
-            }}
-            style={{borderBottomWidth:1,borderTopWidth:1, width:'50%',alignSelf:'center'}}><Text style={{ textAlign: "center", color: 'black', }}>Xem Đơn Từ Chối</Text></TouchableOpacity>
+              onPress={() => {
+                nav.navigate('Billrejected', { ID: ban });
+              }}
+              style={{ borderBottomWidth: 1, borderTopWidth: 1, width: '50%', alignSelf: 'center' }}><Text style={{ textAlign: "center", color: 'black', }}>Xem Đơn Từ Chối</Text></TouchableOpacity>
           </View>
-          <View style={{height:'75%'}}>
-          {bills.length ?
-            <FlatList
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
-              style={{ marginTop: 5, borderTopWidth: 2, borderBottomWidth: 2 }}
-              
-              data={bills}
-              renderItem={({ item }) => (
-                <View
-                  style={{
+          <View style={{ height: '69%' }}>
+            {bills.length ?
+              <FlatList
+                refreshControl={
+                  <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                }
+                style={{ marginTop: 5, borderTopWidth: 2, borderBottomWidth: 2 }}
 
-                    borderColor: 'black',
-                    borderRadius: 0,
-                    marginBottom: 5
+                data={bills}
+                renderItem={({ item }) => (
+                  <View
+                    style={{
 
-                  }}>
-                  <View style={{ flexDirection: 'row', }}>
-                    <Text style={{ fontWeight: 'bold', color: "black" }}>ID:{item.orderId}</Text>
+                      borderColor: 'black',
+                      borderRadius: 0,
+                      marginBottom: 5
 
-                    <Text style={{ marginLeft: 120, textAlign: "right", fontWeight: '400', color: "black" }}>{`Thời gian: ${formattedTimestamp(item.createdTime)}`}</Text>
-                  </View>
-                  {item.note.length ?
-                    <Text style={{ color: 'red', textAlign: 'center' }}>Ghi chú đơn :({item.note})</Text>
-                    : <Text></Text>
-                  }
-                  {item.items.map((item1) => (
+                    }}>
+                    <View style={{ flexDirection: 'row', }}>
+                      <Text style={{ fontWeight: 'bold', color: "black" }}>ID:{item.orderId}</Text>
 
-                    <View style={{}}>
-
-
-                    {console.log("okee",item1)}
-                      <Text style={{ fontWeight: 'bold', color: "black" }}>{`Tên Món Ăn: ${item1.product.name}`}</Text>
-                      <Text></Text>
-                      {/* <View style={{ flexDirection: 'row' }}> */}
-                      <Text style={{ fontWeight: 'bold', color: 'black', textAlign: 'right' }}>{`Đơn Giá: ${item1.product.discount.minQuantity <item1.quantity ? fomartPrice(item1.product.discountPrice) : fomartPrice(item1.product.price)}`}</Text>
-
-                      {/* <Text style={{ marginLeft: 140, fontWeight: 'bold', color: 'red' }}>{`Giá Giảm: ${fomartPrice(item1.product.discountPrice)}`}</Text> */}
-                      {/* </View> */}
-                      <Text style={{ marginRight: 50, textAlign: 'right', fontWeight: 'bold', color: 'red' }}>{`SL: ${item1.quantity}`}</Text>
-
-
+                      <Text style={{ marginLeft: 120, textAlign: "right", fontWeight: '400', color: "black" }}>{`Thời gian: ${formattedTimestamp(item.createdTime)}`}</Text>
                     </View>
+                    {item.note.length ?
+                      <Text style={{ color: 'red', textAlign: 'center' }}>Ghi chú đơn :({item.note})</Text>
+                      : <Text></Text>
+                    }
+                    {item.items.map((item1) => (
+
+                      <View style={{}}>
+
+
+                        {console.log("okee", item1)}
+                        <Text style={{ fontWeight: 'bold', color: "black" }}>{`Tên Món Ăn: ${item1.product.name}`}</Text>
+                        <Text></Text>
+                        {/* <View style={{ flexDirection: 'row' }}> */}
+                        <Text style={{ fontWeight: 'bold', color: 'black', textAlign: 'right' }}>{`Đơn Giá: ${item1.product.discount.minQuantity < item1.quantity ? fomartPrice(item1.product.discountPrice) : fomartPrice(item1.product.price)}`}</Text>
+
+                        {/* <Text style={{ marginLeft: 140, fontWeight: 'bold', color: 'red' }}>{`Giá Giảm: ${fomartPrice(item1.product.discountPrice)}`}</Text> */}
+                        {/* </View> */}
+                        <Text style={{ marginRight: 8, textAlign: 'right', fontWeight: 'bold', color: 'red' }}>
+                          {item1.quantity === 0 ? 'Trả hết hàng' : 'SL:' + item1.quantity + ' / ' + item1.product.uint}
+                        </Text>
+
+
+                      </View>
 
 
 
 
 
-                  ))}
-                  <Text style={{ fontWeight: 'bold', color: '#111111', textAlign: 'right', marginRight: 2 }}>{`Tổng Tiền Đơn ${item.orderId}:  ${fomartPrice(orderTotalPrices[item.orderId])}`}</Text>
-                  <View style={{ borderBottomWidth: 1, borderStyle: 'dotted' }}></View>
-                </View>
-              )}
+                    ))}
+                    <Text style={{ fontWeight: 'bold', color: '#111111', textAlign: 'right', marginRight: 2 }}>{`Tổng Tiền Đơn ${item.orderId}:  ${fomartPrice(orderTotalPrices[item.orderId])}`}</Text>
+                    <View style={{ borderBottomWidth: 1, borderStyle: 'dotted' }}></View>
+                  </View>
+                )}
 
-            />
+              />
 
-            : 
-            
-            <Text style={{ textAlign: "center", color: 'black',alignSelf:'stretch',justifyContent:'space-evenly',alignItems:'stretch',marginTop:'auto' }} >(Hiện Tại Chưa Có Đơn nào chờ bếp xác nhận)</Text>     
-            }
-            </View>
-
-
-        <View style={{height:'10%'}}>
-          <View>
-          
-            {soluong != 0 ?
-              <View style={{ marginTop: 0, marginBottom: 50 }}>
-                <Text style={{ textAlign: 'right', color: 'black', fontWeight: 'bold', marginRight: 10 }}>{`Tổng Số Lượng Món bàn ${ban} : ${soluong}`}</Text>
-                <Text style={{ textAlign: 'right', color: 'black', fontWeight: 'bold', marginRight: 10 }}> {`Tổng tiền bàn ${ban}: ${fomartPrice(totalPriceOfAllBills)}`}</Text>
-              </View>
               :
-              <View></View>
+
+              <Text style={{ textAlign: "center", color: 'black', alignSelf: 'stretch', justifyContent: 'space-evenly', alignItems: 'stretch', marginTop: 'auto' }} >(Hiện Tại Chưa Có Đơn nào chờ bếp xác nhận)</Text>
             }
           </View>
+
+
+          <View style={{ height: '9%' }}>
+            <View>
+
+              {soluong != 0 ?
+                <View style={{ marginTop: 0, marginBottom: 50 }}>
+                  <Text style={{ textAlign: 'right', color: 'black', fontWeight: 'bold', marginRight: 10 }}>{`Tổng Số Lượng Món bàn ${ban} : ${soluong}`}</Text>
+                  <Text style={{ textAlign: 'right', color: 'black', fontWeight: 'bold', marginRight: 10 }}> {`Tổng tiền bàn ${ban} : ${fomartPrice(totalPriceOfAllBills)}`}</Text>
+                  <Text style={{textAlign:'center'}}>(chưa gồm giá bàn)</Text>
+                </View>
+                :
+                <View></View>
+              }
+            </View>
           </View>
         </View>
         : <></>}
-       
+
     </View>
 
   )

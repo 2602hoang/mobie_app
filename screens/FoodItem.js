@@ -7,7 +7,8 @@ import {
     TouchableOpacity,
     TextInput,
     KeyboardAvoidingView,
-    Keyboard
+    Keyboard,
+    Alert
 } from 'react-native'
 import {images, colors, icons, fontSizes} from '../constants'
 
@@ -90,6 +91,9 @@ function FoodItem(props) {
             flexDirection:'column'}}>
           <TouchableOpacity onPress={() => {
             nav.navigate('Fooddetail',{food: props.food});
+            Alert.alert(
+              `Chi tiết món ăn ${name}`
+            );
           }}>
             <Information title='AAA' size="32"color="#FF8A65"  variant="Broken"  />
           

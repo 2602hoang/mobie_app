@@ -21,6 +21,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { URL } from '../contexts/url';
 import { AuthContext } from '../contexts/AuthContext';
+import { fomartPrice } from '../utilies/Format';
 function Wellcome({ navigation }) {
     const [bans, setBan] = useState([])
     const [timban, setTimban] = useState('');
@@ -100,11 +101,11 @@ function Wellcome({ navigation }) {
         }
         
     }
-
+    
     return (
         <View style={{ flex: 1, backgroundColor: '#FFFFCC' }}>
             <View style={{
-                height: 150,
+                height: '20%',
                 backgroundColor: '#FFFFCC',
                 marginHorizontal: 5,
                 marginVertical: 5,
@@ -216,6 +217,7 @@ function Wellcome({ navigation }) {
                 <View className="bg-[#0A0909] flex-1 justify-center items-center">
                     <ActivityIndicator size={'large'} color={'#1273FE'} />
                 </View> :
+                <View style={{height:'80%'}}>
                 <FlatList
                 refreshControl={
                     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -229,13 +231,14 @@ function Wellcome({ navigation }) {
                             bans.filter(bans => bans.ID == timban)
                             : bans
                     }
-                    numColumns={2}
+                    numColumns={1}
                   
-                    renderItem={({ item, index }) =>
+                    renderItem={({ item}) =>
                        
                         <TouchableOpacity style={{
-                            flex: 0.5, height: 175, marginLeft: index % 2 == 0 ? 10 : 0,
-                            marginTop: 5,
+                            flex: 0.5, height: '100%',
+                            //  marginLeft: index % 2 == 0 ? 10 : 0,
+                            // marginTop: 5,
                             marginBottom: 10,
                             // height:300,
                             marginRight: 5,
@@ -250,12 +253,15 @@ function Wellcome({ navigation }) {
                         >
                              {/* {console.log(item)} */}
                             <View >
-                                <View style={{ flexDirection: 'column', }}>
-                                    <Text style={{ color: item.available ? 'black' : 'red', fontSize: fontSizes.h2, fontWeight: 'bold', marginLeft: 10, marginTop: 10 }}>Tên bàn :{item.ID}</Text>
-                                    <Text style={{   color: item.available ? 'black' : 'red', fontSize: fontSizes.h3, fontWeight: 'bold', marginLeft: 10, marginTop: 10 }}>Trạng thái: {item.available ? 'Trống' : 'Có Khách'}</Text>
-                                    <Text style={{   color:  'black', fontSize: fontSizes.h3, fontWeight: 'bold', marginLeft: 10, marginTop: 10 }}>Khu Vực:{item.area.pos}</Text>
-                                    <Text></Text>
-                                    <Text style={{ color: '#00CC00', fontSize: fontSizes.h4, fontWeight: 'bold', marginLeft: 10, marginTop: 10 }}>Số lượng khách :{item.capacity}</Text>
+                                <View style={{ flexDirection: 'column',  }}>
+                                    <Text style={{ color: item.available ? 'black' : 'red', fontSize: fontSizes.h2, fontWeight: 'bold', textAlign:'center'}}>Tên bàn :{item.ID}</Text>
+                                    <Text style={{   color: item.available ? 'black' : 'red', fontSize: fontSizes.h3, fontWeight: 'bold', textAlign:'center'}}>Trạng thái: {item.available ? 'Trống' : 'Có Khách'}</Text>
+                                 
+                                    <Text style={{   color:  'red', fontSize: fontSizes.h3, fontWeight: 'bold', textAlign:'center' }}>{item.basePrice===0? "": "Phụ Phí: "+fomartPrice(item.basePrice)}</Text>
+                                    {/* <Text></Text> */}
+                                    <Text style={{   color:  'black', fontSize: fontSizes.h3, fontWeight: 'bold', textAlign:'center'}}>Khu Vực:{item.area.pos}</Text>
+                                    <Text style={{   color:  'black', fontSize: fontSizes.h3, fontWeight: 'bold', textAlign:'center' }}>Loại:{item.normalTable?"Phổ Thông":"Bàn VIP"}</Text>                                  
+                                    <Text style={{ color: '#00CC00', fontSize: fontSizes.h4, fontWeight: 'bold', textAlign:'center' }}>Số lượng khách :{item.capacity}</Text>
                                 
                 
                                 
@@ -266,9 +272,9 @@ function Wellcome({ navigation }) {
                                     </View>
                                 )                                
                                 )} */}
-                        </TouchableOpacity>} />}
-
-                                
+                        </TouchableOpacity>} />
+                </View>}
+                             
         </View>
 
     )

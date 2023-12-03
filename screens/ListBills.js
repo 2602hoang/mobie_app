@@ -31,7 +31,7 @@ export default function ListBills({ route, }) {
   const numChecked = useRef(0);
   const nav = useNavigation();
   const isFocused = useIsFocused();
-  
+
 
 
   const ban = route.params.id;
@@ -44,11 +44,8 @@ export default function ListBills({ route, }) {
   }, 0);
 
 
-  const totalPrice = listbill.map((item1) => {
-    const price = item1.items.map(p => p.product.discountPrice * p.quantity).reduce((acc, p) => acc + p, 0);
+  // {console.log(listbill.table.map(p=>p.table.basePrice))}
 
-    return price;
-  });
   const totalPriceOfAllBills = listbill.reduce((acc, bill) => {
     const totalPriceForBill = bill.items.reduce((billAcc, item) => {
       // Apply the appropriate price based on quantity
@@ -71,6 +68,7 @@ export default function ListBills({ route, }) {
   const orderTotalPrices = {};
   listbill.forEach((order) => {
     const totalPrice1 = order.items.reduce((acc, item) => {
+      // {console.log(item.table.basePrice)}
       if (item.quantity > item.product.discount.minQuantity) {
         acc += item.product.discountPrice * item.quantity;
       } else {
@@ -94,7 +92,7 @@ export default function ListBills({ route, }) {
     setTimeout(() => {
       setIsLoading(false);
     }, 500)
-  }, [isLoading,isFocused]);
+  }, [isLoading, isFocused]);
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     getlistbill();
@@ -102,7 +100,8 @@ export default function ListBills({ route, }) {
       setRefreshing(false);
     }, 500);
   }, []);
-
+  const giaban = listbill.map((item) => item.table.basePrice);
+  // console.log(giaban[0]);
 
   const finishedbill = async (id) => {
     try {
@@ -128,6 +127,7 @@ export default function ListBills({ route, }) {
         position: Toast.positions.BOTTOM,
         animation: true,
       })
+      nav.navigate('Wellcome');
     setIsLoading(!isLoading);
     await AsyncStorage.removeItem('check');
     setCheck([])
@@ -159,7 +159,8 @@ export default function ListBills({ route, }) {
       const response = await axios.get(`${URL}api/v1/booking/table/${route.params.id}`);
       if (response.data.statusCode === 200) {
         setListbill(response.data.data);
-     
+        // console.log(response.data.data);
+
       }
 
     } catch (error) {
@@ -186,78 +187,78 @@ export default function ListBills({ route, }) {
 
   // { console.log("1213",listbill[0]) }
   return (
-    <View style={{ backgroundColor: '#ffffcc', flex:1 }}>
+    <View style={{ backgroundColor: '#ffffcc', flex: 1 }}>
       <UIHeader
-        title={`ĐƠN HÀNG ĐƯỢC BẾP CHẤP NHẬN  CỦA BÀN: ${ban}`}
+        title={`ĐƠN HÀNG CỦA BÀN: ${ban}`}
         isShowBack
       // isOption
 
       />
-      {listbill.length && !isLoading?
-      <View style={{display:"flex", flexDirection: 'row', position: "absolute", bottom: 5, justifyContent:'center', alignItems:'flex-end' }}>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: '#00CC00',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: '80%',
-                  height: 50,
-                  borderRadius: 10,
-                }}
-                onPress={() => {
-                  if (numChecked.current === dem())
-                    finishedbills()
-                  else {
-                    Toast.show('Đơn hàng chưa được giao đủ món',
-                      {
-                        backgroundColor: '#3B404F',
-                        textColor: '#ffffff',
-                        opacity: 1,
-                        duration: Toast.durations.SHORT,
-                        position: Toast.positions.BOTTOM,
-                        animation: true,
-                      });
-                  }
-                }}>
-                <Text style={{ color: 'black', }}>KẾT THÚC</Text></TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  
-                }}
-                onPress={() => {
-                  Alert.alert(
-                    "Bạn Muốn Đền Món Hay Trả Món Nước",
-                    "Đền Món Hoặc Trả Món",
-                    // "Trả Món Nước ",
-                    [
-                      {
-                        text: 'Trả Món',
-                        onPress: () => {
-                          nav.navigate('Den', { bills: listbill })
-                        },
-                      },
-                      {
-                        text: 'Đền món',
-                        onPress: () => {
-                          nav.navigate('ListBills2', { bills: listbill })
-                        },
-                      },
-                      {
-                        text: 'Hủy',
-                        onPress: () => {
-                          // Do nothing
-                        },
-                      },
-                    ],
-                  );
-                }}
-              >
-                <MoreCircle
-                  size="50"
-                  color="red"
-                />
-              </TouchableOpacity>
-            </View>
+      {listbill.length && !isLoading ?
+        <View style={{ display: "flex", flexDirection: 'row', position: "absolute", bottom: 5, justifyContent: 'center', alignItems: 'flex-end' }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: '#00CC00',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '80%',
+              height: 50,
+              borderRadius: 10,
+            }}
+            onPress={() => {
+              if (numChecked.current === dem())
+                finishedbills()
+              else {
+                Toast.show('Đơn hàng chưa được giao đủ món',
+                  {
+                    backgroundColor: '#3B404F',
+                    textColor: '#ffffff',
+                    opacity: 1,
+                    duration: Toast.durations.SHORT,
+                    position: Toast.positions.BOTTOM,
+                    animation: true,
+                  });
+              }
+            }}>
+            <Text style={{ color: 'black', }}>KẾT THÚC</Text></TouchableOpacity>
+          <TouchableOpacity
+            style={{
+
+            }}
+            onPress={() => {
+              Alert.alert(
+                "Bạn Muốn Đền Món Hay Trả Món Nước",
+                "Đền Món Hoặc Trả Món",
+                // "Trả Món Nước ",
+                [
+                  {
+                    text: 'Trả Món',
+                    onPress: () => {
+                      nav.navigate('Den', { bills: listbill })
+                    },
+                  },
+                  {
+                    text: 'Đền món',
+                    onPress: () => {
+                      nav.navigate('ListBills2', { bills: listbill })
+                    },
+                  },
+                  {
+                    text: 'Hủy',
+                    onPress: () => {
+                      // Do nothing
+                    },
+                  },
+                ],
+              );
+            }}
+          >
+            <MoreCircle
+              size="50"
+              color="red"
+            />
+          </TouchableOpacity>
+        </View>
         : <></>}
 
       {isLoading ?
@@ -265,8 +266,9 @@ export default function ListBills({ route, }) {
           <ActivityIndicator size={'large'} color={'#1273FE'} />
         </View> :
         listbill.length ?
-          <View>
-            <View style={{height:'90%'}}>
+
+          <View style={{ height: '80%' }}>
+            <View style={{ height: '83%' }}>
               <FlatList
                 refreshControl={
                   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -283,11 +285,31 @@ export default function ListBills({ route, }) {
                     listbill={listbill}
                     numChecked={numChecked}
                   >
+                    {/* <Text>ok :{item.table.basePrice}</Text> */}
                   </Billitemc>
-                  
+
                 )} />
-                <Text style={{ textAlign: 'right', color: 'black', fontWeight: 'bold', marginRight: 10 }}>{`Tổng Số Lượng Món bàn ${ban} : ${soluong}`}</Text>
-                <Text style={{ textAlign: 'right', color: 'black', fontWeight: 'bold', marginRight: 10 }}> {`Tổng tiền bàn ${ban}: ${fomartPrice(totalPriceOfAllBills)}`}</Text>
+            </View>
+            <View style={{ height: '17%' }}>
+              <View style={{ flexDirection: 'row' }}>
+                <View style={{ flexDirection: 'column' }}>
+                  <Text style={{ textAlign: 'left', color: 'black', fontWeight: 'bold',marginLeft: 'auto' }}>
+                    {giaban[0] === 0 ? "" : `Giá bàn ${ban}: ${fomartPrice(giaban[0])}`}
+                  </Text>
+                  <Text style={{ textAlign: 'left', color: 'black', fontWeight: 'bold', }}>{`Tổng Số Lượng Món bàn ${ban} : `}</Text>
+
+                  <Text style={{  color: 'black', fontWeight: 'bold',  }}>{`Tổng tiền bàn  ${ban} : `}</Text>
+
+                </View>
+                <View style={{ flexDirection: 'column', }}>
+
+                  <Text style={{ textAlign: 'right', color: 'black', fontWeight: 'bold',  }}>{giaban[0] === 0 ? "" : fomartPrice(giaban[0])}</Text>
+                  <Text style={{ color: 'black', fontWeight: 'bold', }}>{soluong}</Text>
+                  <Text style={{  color: 'black', fontWeight: 'bold',right:20}}>{fomartPrice((totalPriceOfAllBills + giaban[0]) * 1.1)}</Text>
+
+                </View>
+              </View>
+              <Text style={{ textAlign: 'center', marginRight: 10, fontSize: 10 }}>(Giá trên đã bao gồm giá bàn và VAT)</Text>
             </View>
           </View>
 

@@ -17,8 +17,8 @@ export default function Billitemc({ item, finishedbills, orderTotalPrices, compe
 
       }}>
 
-      {/* <Text style={{ fontWeight: 'bold', color: "black" }} >ID:{item.orderId}</Text> */}
-      <Text style={{ marginLeft: 120, textAlign: "right", fontWeight: '400', color: "black" }}>{`Thời gian đặt: ${formattedTimestamp(item.acceptedTime)}`}</Text>
+      {/* <Text style={{ fontWeight: 'bold', color: "black" }} >ID:{item.table.basePrice}</Text> */}
+      <Text style={{ marginLeft: 'auto', textAlign: "right", fontWeight: '300', color: "black" }}>{`Thời gian đặt: ${formattedTimestamp(item.acceptedTime)}`}</Text>
       {item.items.map((item1) => (
         <Billitem
           item1={item1}

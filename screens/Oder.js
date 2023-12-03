@@ -150,14 +150,14 @@ function Oder({ navigation, }) {
 
 
 
-                <Text style={{ color: 'blue' }}>Nhân phụ trách:{me.fullName}               [BÀN SỐ:{table}] </Text>
+                <Text style={{ color: 'blue' }}>{me.fullName}   [BÀN SỐ:{table}] </Text>
 
                 <Text></Text>
 
             </View>
 
 
-            <View style={{height:'81%'}}>
+            <View style={{height:'80%'}}>
                 <View style={{  }}>
                     <Text style={{ textAlign: 'center', color: 'black' }}> ------đơn hàng tạm tính------</Text>
                 <Text style={{ color: 'red' }}>Ghi Chú Đơn Hàng:</Text>
@@ -176,7 +176,7 @@ function Oder({ navigation, }) {
 
 
                 </View >
-                <View style={{ height:'85%'  }}>
+                <View style={{ height:'75%'  }}>
                     <View style={{ backgroundColor: '#FFFFCC', borderTopWidth: 1,height:'90%' }}>
                         {
                             <FlatList
@@ -204,17 +204,19 @@ function Oder({ navigation, }) {
                             
                     </View>
                     
-                    {tongTien === undefined ?
+                    {tongTien === undefined || tongTien===0 ?
                             <Text></Text>
                             : 
-                            <View style={{height:'15%'}}>
-                           
-                            <Text style={{alignItems:'flex-end',alignSelf:'flex-end',alignContent:'flex-end', textAlign: 'center', color: 'red', fontWeight: 'bold', marginBottom: 2,marginRight:5 }}>Tổng Tiền :{fomartPrice(tongTien)}</Text>
-                            <TouchableOpacity 
-                            style={{backgroundColor:'#66FF33',width:'25%',alignSelf:'center',borderRadius:10,borderWidth:1}}
+                            <View style={{height:'10%' ,flexDirection:'row'}}>
+                               
+                                <TouchableOpacity 
+                            style={{backgroundColor:'#ffffcc',width:'40%',alignSelf:'center',borderRadius:10,borderWidth:1,top:5}}
                             onPress={()=>{
                                 setCheck(true);
-                            }}><Text style={{color:check?"red":"black",textAlign:'center'}}>{check?"":"Thêm Giá Bàn"}</Text></TouchableOpacity>
+                            }}><Text style={{color:check?"#ffffcc":"black",textAlign:'center'}}>{check?"":"Thêm Giá Bàn"}</Text></TouchableOpacity>
+                        
+                            <Text style={{alignItems:'flex-end',alignSelf:'flex-end',alignContent:'flex-end', textAlign: 'center', color: 'red', fontWeight: 'bold', marginBottom: 2,marginLeft:'auto' }}>Tổng Tiền :{fomartPrice(tongTien)}</Text>
+                            
                         </View>
                         }
                 </View>
@@ -223,80 +225,80 @@ function Oder({ navigation, }) {
 
              </View>
 
-           <View style={{height:'15%'}}>
-            <View style={{  flexDirection: 'row', borderTopWidth: 3 }}>
-            <TouchableOpacity style={{
-                backgroundColor: '#99FF66',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '33%',
-                height: 50,
-                marginBottom: 5,
-                marginLeft: 0,
-                alignSelf: 'flex-end',
-                borderRightWidth: 3,
-                borderBottomWidth: 3
-
-            }}
-                onPress={() => {
-                    navigation.navigate('ListBills', { id: table });
-                }}
-
-            >
-                <Text style={{ color: 'black' }}>XEM MÓN RA</Text></TouchableOpacity>
-            <TouchableOpacity
-
-                onPress={() => {
-                    navigation.navigate('Oderlist', { id: table })
-
-                }}
-                style={{
-                    backgroundColor: '#FFFF33',
+            <View style={{height:'12%'}}>
+                <View style={{  flexDirection: 'row', borderTopWidth: 3 }}>
+                <TouchableOpacity style={{
+                    backgroundColor: '#99FF66',
                     justifyContent: 'center',
                     alignItems: 'center',
                     width: '33%',
                     height: 50,
                     marginBottom: 5,
+                    marginLeft: 0,
                     alignSelf: 'flex-end',
                     borderRightWidth: 3,
                     borderBottomWidth: 3
 
-                }} >
-                <Text style={{ color: 'black' }}>XEM ĐƠN HÀNG</Text></TouchableOpacity>
-
-            <TouchableOpacity
-                onPress={() => {
-                    if (cartTable?.length) {
-                        navigation.navigate('Oderpin', { cart: cartTable,check :check });
-                    } else {
-                        Toast.show('Đơn Hàng Rỗng',
-                            {
-                                backgroundColor: '#3B404F',
-                                textColor: '#ffffff',
-                                opacity: 1,
-                                duration: Toast.durations.SHORT,
-                                position: Toast.positions.BOTTOM,
-                                animation: true,
-                            })
-                    }
                 }}
-                style={{
-                    backgroundColor: 'red',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: '34%',
-                    height: 50,
-                    marginRight: 5,
-                    marginBottom: 5,
-                    alignSelf: 'flex-end',
-                    borderBottomWidth: 3,
+                    onPress={() => {
+                        navigation.navigate('ListBills', { id: table });
+                    }}
 
-                }} >
-                <Text style={{ color: 'black' }}>ĐẶT MÓN </Text></TouchableOpacity>
+                >
+                    <Text style={{ color: 'black' }}>Xem món ra</Text></TouchableOpacity>
+                <TouchableOpacity
+
+                    onPress={() => {
+                        navigation.navigate('Oderlist', { id: table })
+
+                    }}
+                    style={{
+                        backgroundColor: '#FFFF33',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: '33%',
+                        height: 50,
+                        marginBottom: 5,
+                        alignSelf: 'flex-end',
+                        borderRightWidth: 3,
+                        borderBottomWidth: 3
+
+                    }} >
+                    <Text style={{ color: 'black' }}>Xem Đon Hàng</Text></TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => {
+                        if (cartTable?.length) {
+                            navigation.navigate('Oderpin', { cart: cartTable,check :check });
+                        } else {
+                            Toast.show('Đơn Hàng Rỗng',
+                                {
+                                    backgroundColor: '#3B404F',
+                                    textColor: '#ffffff',
+                                    opacity: 1,
+                                    duration: Toast.durations.SHORT,
+                                    position: Toast.positions.BOTTOM,
+                                    animation: true,
+                                })
+                        }
+                    }}
+                    style={{
+                        backgroundColor: 'red',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: '34%',
+                        height: 50,
+                        marginRight: 5,
+                        marginBottom: 5,
+                        alignSelf: 'flex-end',
+                        borderBottomWidth: 3,
+
+                    }} >
+                    <Text style={{ color: 'black' }}>Đặt món</Text></TouchableOpacity>
+
+                    </View>
 
                 </View>
-
-            </View>
 
 
 
