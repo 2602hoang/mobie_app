@@ -47,6 +47,7 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
+
 // function MyDrawer()  {
 //   return (
 //     <DrawerNavigator>
@@ -100,6 +101,10 @@ function Gui(props) {
           animation: 'slide_from_right'
         }}/>
          <Stack.Screen name='Billrejected' a component={Billrejected}
+        options={{
+          animation: 'slide_from_right'
+        }}/>
+         <Stack.Screen name='FoodList' a component={FoodList}
         options={{
           animation: 'slide_from_right'
         }}/>

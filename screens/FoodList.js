@@ -109,8 +109,7 @@ export default function FoodList({ navigation, route }) {
     //     console.log(foods[0]);
     // }
     return <View style={{ flex: 1, backgroundColor: '#FFFFCC' }}>
-        <View style={{
-            height: '12%',
+        <View style={{  height: '10%',
             marginHorizontal: 5,
             marginVertical: 5,
             flexDirection: 'row',
@@ -143,7 +142,7 @@ export default function FoodList({ navigation, route }) {
             <SearchNormal1 size="55" color="#000000" />
 
         </View>
-        <View style={{ height: '13%' }}>
+        <View style={{ height: '10%' }}>
             <View style={{ flexDirection: 'row', height: 'auto', alignSelf: 'center', }}>
 
                 <TouchableOpacity onPress={() => {
@@ -225,7 +224,7 @@ export default function FoodList({ navigation, route }) {
 
         </View>
 
-        <View style={{ height: '73%' }}>
+        <View style={{ height: '80%' }}>
             <FlatList
                 data={
                     timkiem ?

@@ -49,11 +49,9 @@ export default function Billitem({ item1, numChecked, orderTotalPrices, listbill
         <Text style={{ fontWeight: 'bold', color: "black" }}>{`Tên Món Ăn: ${item1.product.name}`}</Text>
         {/* <Text style={{ marginRight: 50, textAlign: 'right', fontWeight: 'bold', color: 'red' }}>{` ${item1.status? "":"MÓn đang được bếp làm"}`}</Text> */}
         {item1.status ?
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={{ color: !isChecked ? "#FFFFCC" : "#00FF00", fontWeight: !isChecked ? "normal" : "bold", marginLeft: 'auto', textAlign: 'auto' }}>xác nhận đã ra món</Text>
-
-            <CheckBox
-              style={{}}
+          <View style={{ flexDirection: 'row', marginLeft:5 }}>
+             <CheckBox
+              style={{ }}
               onClick={() => {
                 if (isChecked === false) {
                   Alert.alert(
@@ -92,6 +90,9 @@ export default function Billitem({ item1, numChecked, orderTotalPrices, listbill
 
             />
 
+            <Text style={{ color: !isChecked ? "#FFFFCC" : "#00FF00", fontWeight: !isChecked ? "normal" : "bold", marginLeft: 'auto', textAlign: 'auto' }}>xác nhận đã ra món</Text>
+
+           
           </View>
           : <View></View>}
         {/* <View style={{ flexDirection: 'row' ,right}}> */}

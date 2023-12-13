@@ -52,11 +52,11 @@ function FoodItem(props) {
                 marginLeft:20}}> 
           
           
-          <View style={{marginTop:5}}>
+          <View style={{marginTop:2}}>
             <Text style={{
                 fontSize:fontSizes.h6,
                 color:'black',
-                maxWidth:120,
+                maxWidth:100,
             }}>Tên: {name}. </Text>
               {/* <Text></Text> */}
             {/* <Text>{description}</Text> */}
@@ -69,14 +69,14 @@ function FoodItem(props) {
                 fontSize:fontSizes.h4,
                 color:'black',
                 
-            }}>Đơn giá: {fomartPrice(price)} / {uint}</Text>
+            }}>ĐG: {fomartPrice(price)} / {uint}</Text>
            
             <Text style={{
                 fontSize:fontSizes.h6,
                 color:'red',
                 fontWeight:'bold',
                 fontSize:fontSizes.h4
-            }}>Giá khuyến mãi: {fomartPrice(discountPrice)}</Text>
+            }}>Giá KM: {fomartPrice(discountPrice)}</Text>
             {/* <Text style={{
                 fontSize:fontSizes.h6,
                 color:'red',
@@ -87,7 +87,7 @@ function FoodItem(props) {
             </View>
 
             <View style={{
-            marginRight:5,
+            // marginRight:5,
             flexDirection:'column'}}>
           <TouchableOpacity onPress={() => {
             nav.navigate('Fooddetail',{food: props.food});

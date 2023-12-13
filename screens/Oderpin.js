@@ -61,7 +61,7 @@ function Oderpin({ navigation, route }) {
                     if (response.data.statusCode === 200) {
                         removeCart();
                         setNote('');
-                        Toast.show('Thành công',
+                        Toast.show(`Đặt đơn thành công bàn ${table}`,
                             {
                                 backgroundColor: '#3B404F',
                                 textColor: '#ffffff',
@@ -70,7 +70,7 @@ function Oderpin({ navigation, route }) {
                                 position: Toast.positions.BOTTOM,
                                 animation: true,
                             })
-                        navigation.navigate('Thực đơn')
+                        navigation.navigate('Oderlist',{id:table})
                     }
                 } catch (error) {
                     Toast.show('Mã Pin Sai',
@@ -135,7 +135,7 @@ function Oderpin({ navigation, route }) {
                 }}>
                     <ArrowLeft size="55" color="black" />
                 </TouchableOpacity>
-                <Text style={{ textAlign:'right',alignSelf:'center',right:-180 }}>[BÀN: {table}]</Text>
+                <Text style={{ textAlign:'right',alignSelf:'center',right:-250}}>[BÀN: {table}]</Text>
             </View>
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                 <SafeAreaView style={{ width: 300 }}>
@@ -143,7 +143,7 @@ function Oderpin({ navigation, route }) {
                     <Text style={{ color: 'red', textAlign: 'center' }}>
                         Hãy Nhập Chính Xác Mã Pin Của Bạn
                     </Text>
-                    <Text>
+                    <Text style={{textAlign:'center'}}>
                         *_________________________________*
                     </Text>
                     <Text>

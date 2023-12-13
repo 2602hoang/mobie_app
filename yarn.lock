@@ -5868,6 +5868,11 @@ react-native-svg@^13.14.0, react-native-svg@>=5.3:
     css-select "^5.1.0"
     css-tree "^1.1.3"
 
+react-native-tooltip@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.npmjs.org/react-native-tooltip/-/react-native-tooltip-5.2.0.tgz"
+  integrity sha512-3mbPGd/VDfb3dUZmdmgg4eE8idJU4OyYM9ItGifnofz+Cz50Aua+sVGo2Ecc7zHV0S+kM0mOyLL758hhTz2gDw==
+
 react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", react-native@>=0.20.0, react-native@>=0.46, react-native@>=0.47.0, react-native@0.72.6:
   version "0.72.6"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.72.6.tgz"

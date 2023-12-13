@@ -176,7 +176,7 @@ function Oder({ navigation, }) {
 
 
                 </View >
-                <View style={{ height:'75%'  }}>
+                <View style={{ height:'80%'  }}>
                     <View style={{ backgroundColor: '#FFFFCC', borderTopWidth: 1,height:'90%' }}>
                         {
                             <FlatList
@@ -208,13 +208,13 @@ function Oder({ navigation, }) {
                             <Text></Text>
                             : 
                             <View style={{height:'10%' ,flexDirection:'row'}}>
-                               
+                               {!check?
                                 <TouchableOpacity 
                             style={{backgroundColor:'#ffffcc',width:'40%',alignSelf:'center',borderRadius:10,borderWidth:1,top:5}}
                             onPress={()=>{
                                 setCheck(true);
                             }}><Text style={{color:check?"#ffffcc":"black",textAlign:'center'}}>{check?"":"Thêm Giá Bàn"}</Text></TouchableOpacity>
-                        
+                            :<></>}
                             <Text style={{alignItems:'flex-end',alignSelf:'flex-end',alignContent:'flex-end', textAlign: 'center', color: 'red', fontWeight: 'bold', marginBottom: 2,marginLeft:'auto' }}>Tổng Tiền :{fomartPrice(tongTien)}</Text>
                             
                         </View>
@@ -225,51 +225,13 @@ function Oder({ navigation, }) {
 
              </View>
 
-            <View style={{height:'12%'}}>
-                <View style={{  flexDirection: 'row', borderTopWidth: 3 }}>
-                <TouchableOpacity style={{
-                    backgroundColor: '#99FF66',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: '33%',
-                    height: 50,
-                    marginBottom: 5,
-                    marginLeft: 0,
-                    alignSelf: 'flex-end',
-                    borderRightWidth: 3,
-                    borderBottomWidth: 3
-
-                }}
-                    onPress={() => {
-                        navigation.navigate('ListBills', { id: table });
-                    }}
-
-                >
-                    <Text style={{ color: 'black' }}>Xem món ra</Text></TouchableOpacity>
-                <TouchableOpacity
-
-                    onPress={() => {
-                        navigation.navigate('Oderlist', { id: table })
-
-                    }}
-                    style={{
-                        backgroundColor: '#FFFF33',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: '33%',
-                        height: 50,
-                        marginBottom: 5,
-                        alignSelf: 'flex-end',
-                        borderRightWidth: 3,
-                        borderBottomWidth: 3
-
-                    }} >
-                    <Text style={{ color: 'black' }}>Xem Đon Hàng</Text></TouchableOpacity>
+            <View style={{height:'10%'}}>
+            
 
                 <TouchableOpacity
                     onPress={() => {
                         if (cartTable?.length) {
-                            navigation.navigate('Oderpin', { cart: cartTable,check :check });
+                            navigation.navigate('Oderpin', { cart: cartTable,check :check, table: table  });
                         } else {
                             Toast.show('Đơn Hàng Rỗng',
                                 {
@@ -283,20 +245,22 @@ function Oder({ navigation, }) {
                         }
                     }}
                     style={{
-                        backgroundColor: 'red',
+                        backgroundColor: '#7FFF00',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        width: '34%',
+                        width: '60%',
                         height: 50,
                         marginRight: 5,
                         marginBottom: 5,
-                        alignSelf: 'flex-end',
-                        borderBottomWidth: 3,
+                        alignSelf: 'center',
+                        // borderBottomWidth: 3,
+                        borderWidth:5,
+                        borderRadius:10
 
                     }} >
-                    <Text style={{ color: 'black' }}>Đặt món</Text></TouchableOpacity>
+                    <Text style={{ color: 'red' }}>Đặt món</Text></TouchableOpacity>
 
-                    </View>
+                    {/* </View> */}
 
                 </View>
 

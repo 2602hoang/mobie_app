@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 
 import { colors, fontSizes } from '../constants'
-import { ArrowLeft, Menu } from 'iconsax-react-native'
+import { ArrowLeft, Home, HomeHashtag, Menu } from 'iconsax-react-native'
 import { useNavigation } from '@react-navigation/native'
 import { MenuOption, MenuProvider } from 'react-native-popup-menu'
 
@@ -23,6 +23,7 @@ function UIHeader(props) {
         onPressRightIcon,
         isShowBack,
         isOption,
+        gohome,
     } = props
     return <View style={{
         height: 55,
@@ -50,6 +51,24 @@ function UIHeader(props) {
                     size="55" color="black" />
             </TouchableOpacity> : <></>
         }
+         {gohome ?
+            <TouchableOpacity
+                style={{
+                    left: 0,
+                    position: 'absolute'
+                }}
+                onPress={() => {
+                    navigation.navigate('Wellcome');
+                }}>
+                
+              <HomeHashtag
+              size="50"
+              color="black"
+              />
+        
+            </TouchableOpacity> : <></>
+        }
+
         {/* {isOption ?
             <TouchableOpacity
                 style={{

@@ -8,7 +8,7 @@ import { colors, fontSizes } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 import Oder from "./Oder";
 import { UIHeader } from "../components";
-import { ArrowLeft } from "iconsax-react-native";
+import { ArrowLeft, Home } from "iconsax-react-native";
 import { fomartPrice } from "../utilies/Format";
 import { formattedTimestamp } from "../utilies/DateTime";
 
@@ -17,6 +17,7 @@ export default function Oderlist({ route, navigation }) {
 
   const [bills, setBills] = useState([])
   const nav = useNavigation();
+  const { setTable } = useContext(AuthContext);
   const ban = route.params.id;
   const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -30,7 +31,7 @@ export default function Oderlist({ route, navigation }) {
   }, 0);
 
 
-  const totalPriceOfAllBills = bills.reduce((acc, bill) => {
+  const totalPriceOfAllBills = bills?.reduce((acc, bill) => {
     const totalPriceForBill = bill.items.reduce((billAcc, item) => {
       // Apply the appropriate price based on quantity
       let itemPrice;
@@ -106,21 +107,31 @@ export default function Oderlist({ route, navigation }) {
     <View style={{ backgroundColor: '#ffffcc', flex: 1 }}>
       <UIHeader
         title={`ĐƠN CHỜ XÁC NHẬN BÀN (${ban})`}
-        isShowBack
+        gohome
       />
-
 
       {!isLoading ?
         <View >
-          <View style={{ marginTop: 10, marginBottom: 10 }}>
-            <Text style={{ textAlign: "center", fontSize: fontSizes.h1, color: 'red', marginBottom: 10 }}>---Danh Sách Món Ăn---</Text>
-            <TouchableOpacity
-              onPress={() => {
-                nav.navigate('Billrejected', { ID: ban });
-              }}
-              style={{ borderBottomWidth: 1, borderTopWidth: 1, width: '50%', alignSelf: 'center' }}><Text style={{ textAlign: "center", color: 'black', }}>Xem Đơn Từ Chối</Text></TouchableOpacity>
+          <View style={{ marginTop: 10, marginBottom: 10, }}>
+            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+              <Text style={{ textAlign: "center", fontSize: fontSizes.h1, color: 'red', marginBottom: 10 }}>---Danh Sách Món Ăn---</Text>
+
+            </View>
+            <View style={{ flexDirection: 'row' }}>
+              <TouchableOpacity
+                onPress={() => {
+                  nav.navigate('Billrejected', { ID: ban });
+                }}
+                style={{ borderBottomWidth: 1, borderTopWidth: 1, borderRadius: 5, width: '50%', alignSelf: 'center' }}><Text style={{ borderLeftWidth: 1, borderRightWidth: 1, textAlign: "center", color: 'black', }}>Xem Đơn Từ Chối</Text></TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  nav.navigate('ListBills', { id: ban });
+                }}
+                style={{ borderBottomWidth: 1, borderTopWidth: 1, borderRadius: 5, width: '50%', alignSelf: 'center' }}><Text style={{ borderRightWidth: 1, textAlign: "center", color: 'black', }}>Xem Đơn Chấp Nhận</Text></TouchableOpacity>
+            </View>
+
           </View>
-          <View style={{ height: '69%' }}>
+          <View style={{ height: '74%' }}>
             {bills.length ?
               <FlatList
                 refreshControl={
@@ -174,10 +185,12 @@ export default function Oderlist({ route, navigation }) {
                     ))}
                     <Text style={{ fontWeight: 'bold', color: '#111111', textAlign: 'right', marginRight: 2 }}>{`Tổng Tiền Đơn ${item.orderId}:  ${fomartPrice(orderTotalPrices[item.orderId])}`}</Text>
                     <View style={{ borderBottomWidth: 1, borderStyle: 'dotted' }}></View>
+                   
                   </View>
                 )}
 
               />
+
 
               :
 
@@ -186,14 +199,23 @@ export default function Oderlist({ route, navigation }) {
           </View>
 
 
-          <View style={{ height: '9%' }}>
+          <View style={{ height: '10%' }}>
             <View>
 
               {soluong != 0 ?
                 <View style={{ marginTop: 0, marginBottom: 50 }}>
+                   <View>
+                      <TouchableOpacity
+                        onPress={() => {
+                          console.log(ban);
+                          nav.navigate('MyTabs',  ban );
+                          setTable(ban);
+                        }}
+                        style={{borderWidth:2,borderColor:'red', borderRadius: 5, width: '30%', alignSelf: 'center',marginTop:2 }}><Text style={{  textAlign: "center", color: 'red', }}>Đặt thêm đơn</Text></TouchableOpacity>
+                    </View>
                   <Text style={{ textAlign: 'right', color: 'black', fontWeight: 'bold', marginRight: 10 }}>{`Tổng Số Lượng Món bàn ${ban} : ${soluong}`}</Text>
                   <Text style={{ textAlign: 'right', color: 'black', fontWeight: 'bold', marginRight: 10 }}> {`Tổng tiền bàn ${ban} : ${fomartPrice(totalPriceOfAllBills)}`}</Text>
-                  <Text style={{textAlign:'center'}}>(chưa gồm giá bàn)</Text>
+                  <Text style={{ textAlign: 'center' }}>(chưa gồm giá bàn)</Text>
                 </View>
                 :
                 <View></View>

@@ -23,10 +23,10 @@ function Login({navigation},) {
  
     const [errorEmail, setErrorEmail] = useState('')
     const [errorPassword, setErrorPassword] = useState('');
-    const [email, setEmail] = useState('levanc@gmail.com')
+    const [email, setEmail] = useState('caovana@gmail.com')
     //dsoFresherXuanHoa
     //dsoInternXuanHoa
-    const [password, setPassword] = useState('levanc@gmail.com')
+    const [password, setPassword] = useState('caovana@gmail.com')
     const { Login, errorLogin } = useContext(AuthContext);
     const isValidationOK = () => email.length > 0 && password.length > 0
                             && isValidEmail(email) == true

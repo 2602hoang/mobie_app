@@ -23,7 +23,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 
 export default function Billrejected({ route }) {
-
+  const { setTable } = useContext(AuthContext);
   const [billrejected, setBillrejected] = useState();
   const Ban = route.params.ID;
   // {console.log(Ban)} 
@@ -53,7 +53,7 @@ export default function Billrejected({ route }) {
       const response = await axios.get(`${URL}api/v1/booking/table/rejected/${route.params.ID}`);
       if (response.data.statusCode === 200) {
         setBillrejected(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
       }
 
     } catch (error) {
@@ -68,7 +68,8 @@ export default function Billrejected({ route }) {
         title={`ĐƠN BẾP TỪ CHỐI BÀN :${Ban} `}
         isShowBack
       />
-      
+      {/* {!billrejected === undefined || billrejected.length === 0 ? */}
+
         <View style={{ height: "80%" }}>
           <FlatList
             data={billrejected}
@@ -83,7 +84,7 @@ export default function Billrejected({ route }) {
                 <View>
                   <View style={{ flexDirection: "row" }}>
                     <Text
-                      style={{ fontWeight: "bold", color: "black", marginRight: 'auto'}}
+                      style={{ fontWeight: "bold", color: "black", marginRight: 'auto' }}
                     >
                       ID: {item.orderId}
                     </Text>
@@ -134,8 +135,8 @@ export default function Billrejected({ route }) {
                         }}
                       >
                         {`Đơn Giá: ${item1.product.discount.minQuantity < item1.quantity
-                            ? fomartPrice(item1.product.discountPrice)
-                            : fomartPrice(item1.product.price)
+                          ? fomartPrice(item1.product.discountPrice)
+                          : fomartPrice(item1.product.price)
                           }`}
                       </Text>
                     </View>
@@ -145,15 +146,18 @@ export default function Billrejected({ route }) {
               </View>
             )}
           />
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                nav.navigate('MyTabs',  Ban );
+                setTable(Ban);
+              }}
+              style={{ backgroundColor: '#ffffff', borderWidth: 1, width: '50%', alignSelf: 'center', marginTop: 6 }}><Text style={{ textAlign: "center", color: 'red', }}>Đặt lại đơn</Text></TouchableOpacity>
+          </View>
         </View>
-         
-      <View>
-        <TouchableOpacity
-          onPress={() => {
-            nav.navigate('Thực đơn');
-          }}
-          style={{ backgroundColor: '#ffffff', borderWidth: 1, width: '50%', alignSelf: 'center', marginTop: 6 }}><Text style={{ textAlign: "center", color: 'red', }}>Đặt lại đơn</Text></TouchableOpacity>
-      </View>
+        {/* : <Text style={{textAlign:'center',alignSelf:'stretch',justifyContent:'center',alignContent:'center'}}> hiện không có đơn nào bếp từ chối cả</Text>} */}
+
+
     </View>
   )
 }

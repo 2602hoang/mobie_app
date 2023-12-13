@@ -80,6 +80,7 @@ export const AuthContextProvider = ({ children }) => {
 			
 		} catch (error) {
 			console.log('Loging error: ',error);
+			console.log(error);
 			setErrorLogin('Thông tin không chính xác');
 			setTimeout(() =>{
 						setErrorLogin('');
